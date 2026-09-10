@@ -1,0 +1,467 @@
+# Roleradar target companies.
+#
+# Each entry:
+#   name:  display name
+#   ats:   greenhouse | lever | ashby | workable | none
+#   token: the board token / company slug for that ATS (omit for "none")
+#   lane:  free-text tag shown in the output (group companies however you like)
+#   url:   careers page (optional; shown in the "manual check" list for ats: none)
+#   note:  anything worth remembering (optional)
+#
+# "none" = the company uses a system we don't poll (Workday, SmartRecruiters,
+# Teamtailor, custom...). They're listed on the output page under "Manual check"
+# so you know what the sweep is NOT covering.
+#
+# Tokens below were verified against the live APIs on 2026-09-09.
+
+companies:
+
+  # ---------------------------------------------------------------- wealth
+  - name: St James's Place
+    ats: none
+    lane: wealth
+    url: https://www.sjp.co.uk/careers
+    note: Cornerstone (custom)
+  - name: Hargreaves Lansdown
+    ats: none
+    lane: wealth
+    url: https://hargreaveslansdown.wd3.myworkdayjobs.com/HargreavesLansdown
+    note: Workday
+  - name: AJ Bell
+    ats: none
+    lane: wealth
+    url: https://www.ajbell.co.uk/group/careers/vacancies
+    note: custom careers site
+  - name: interactive investor
+    ats: workable
+    token: interactive-investor
+    lane: wealth
+    note: mostly Leeds/Manchester, occasional London
+  - name: Nutmeg
+    ats: none
+    lane: wealth
+    url: https://www.nutmeg.com/careers
+    note: J.P. Morgan careers (Oracle HCM)
+  - name: Moneybox
+    ats: lever
+    token: moneyboxapp
+    lane: wealth
+  - name: Moneyfarm
+    ats: workable
+    token: moneyfarm
+    lane: wealth
+    note: mostly Milan, a few London
+  - name: Wealthify
+    ats: none
+    lane: wealth
+    url: https://www.wealthify.com/careers
+    note: no listings page, email the People Team
+  - name: Vanguard UK
+    ats: none
+    lane: wealth
+    url: https://www.vanguardjobs.com/
+    note: Workday
+  - name: Fidelity International
+    ats: none
+    lane: wealth
+    url: https://careers.fidelityinternational.com/
+    note: Workday
+  - name: abrdn (Aberdeen)
+    ats: none
+    lane: wealth
+    url: https://www.aberdeenplc.com/en-gb/careers
+    note: Workday
+  - name: Quilter
+    ats: none
+    lane: wealth
+    url: https://careers.quilter.com/
+    note: Workday
+  - name: Evelyn Partners
+    ats: none
+    lane: wealth
+    url: https://www.evelyn.com/careers/
+    note: SmartRecruiters
+  - name: Rathbones
+    ats: none
+    lane: wealth
+    url: https://www.rathbones.com/careers
+    note: custom careers site
+  - name: Netwealth
+    ats: none
+    lane: wealth
+    url: https://www.netwealth.com/careers
+    note: custom (the Ashby "netwealth" board is an unrelated Australian firm)
+  - name: PensionBee
+    ats: none
+    lane: wealth
+    url: https://www.pensionbee.com/careers
+    note: Teamtailor
+  - name: Penfold
+    ats: none
+    lane: wealth
+    url: https://jobs.gohire.io/penfold-kaohhl0e/
+    note: GoHire
+
+  # --------------------------------------------------------------- fintech
+  - name: Lendable
+    ats: ashby
+    token: lendable
+    lane: fintech
+  - name: Zopa
+    ats: lever
+    token: zopa
+    lane: fintech
+  - name: Monzo
+    ats: greenhouse
+    token: monzo
+    lane: fintech
+  - name: Starling Bank
+    ats: workable
+    token: starling-bank
+    lane: fintech
+  - name: Revolut
+    ats: none
+    lane: fintech
+    url: https://www.revolut.com/careers/
+    note: custom careers site
+  - name: Tide
+    ats: greenhouse
+    token: tide
+    lane: fintech
+  - name: Allica Bank
+    ats: ashby
+    token: allica-bank
+    lane: fintech
+  - name: OakNorth
+    ats: ashby
+    token: oaknorth
+    lane: fintech
+  - name: Atom Bank
+    ats: none
+    lane: fintech
+    url: https://www.atombank.co.uk/careers/
+    note: custom careers site
+  - name: Chip
+    ats: none
+    lane: fintech
+    url: https://chip.teamtailor.com/
+    note: Teamtailor
+  - name: Plum
+    ats: workable
+    token: withplum
+    lane: fintech
+    note: mostly Athens/Nicosia, some London
+  - name: Freetrade
+    ats: ashby
+    token: freetrade
+    lane: fintech
+  - name: Trading 212
+    ats: ashby
+    token: trading212
+    lane: fintech
+  - name: eToro
+    ats: none
+    lane: fintech
+    url: https://www.etoro.com/about/careers/
+    note: custom (Comeet)
+  - name: Wise
+    ats: none
+    lane: fintech
+    url: https://wise.jobs/
+    note: SmartRecruiters Attrax (the Greenhouse "wise" board is an unrelated US company)
+  - name: ClearScore
+    ats: greenhouse
+    token: clearscoretechnologylimited
+    lane: fintech
+  - name: Experian Consumer
+    ats: none
+    lane: fintech
+    url: https://www.experian.com/careers/locations-teams/uk---ireland
+    note: SmartRecruiters
+  - name: TotallyMoney
+    ats: none
+    lane: fintech
+    url: https://intelligentlending.careers.hibob.com/
+    note: HiBob
+  - name: Creditspring
+    ats: none
+    lane: fintech
+    url: https://creditspring.teamtailor.com/
+    note: Teamtailor
+  - name: Updraft
+    ats: workable
+    token: updraft
+    lane: fintech
+
+  # -------------------------------------------------------------- property
+  - name: LendInvest
+    ats: none
+    lane: property
+    url: https://careers.lendinvest.com/
+    note: Teamtailor
+  - name: Landbay
+    ats: greenhouse
+    token: landbay
+    lane: property
+  - name: Octopus Real Estate
+    ats: none
+    lane: property
+    url: https://octopusgroup.com/careers/listings/
+    note: SmartRecruiters (Octopus Group)
+  - name: Shawbrook
+    ats: none
+    lane: property
+    url: https://careers.shawbrook.co.uk/en/jobs
+    note: custom careers site
+  - name: Together Money
+    ats: none
+    lane: property
+    url: https://togethermoney.com/about-us/careers
+    note: SmartRecruiters
+  - name: MT Finance
+    ats: none
+    lane: property
+    url: https://www.mt-finance.com/careers/
+    note: roles listed on their own site
+  - name: CapitalRise
+    ats: none
+    lane: property
+    url: https://www.capitalrise.com/
+    note: no careers page found
+  - name: Brickflow
+    ats: none
+    lane: property
+    url: https://brickflow.com/
+    note: no careers page found
+  - name: Nested
+    ats: workable
+    token: nested
+    lane: property
+    note: careers page links to apply.workable.com/nested; board was empty at setup
+  - name: Habito
+    ats: none
+    lane: property
+    url: https://www.habito.com/careers
+    note: no listings at setup
+  - name: Better.co.uk
+    ats: none
+    lane: property
+    url: https://better.co.uk/careers
+    note: UK careers page redirects to Better.com (US)
+  - name: Twenty7tec
+    ats: none
+    lane: property
+    url: https://www.twenty7tec.com/careers/
+    note: roles listed on their own site
+  - name: Coadjute
+    ats: none
+    lane: property
+    url: https://www.coadjute.com/
+    note: no careers page found
+  - name: Rightmove
+    ats: greenhouse
+    token: rightmovecareers
+    lane: property
+  - name: Zoopla (Houseful)
+    ats: none
+    lane: property
+    url: https://houseful.co.uk/careers/
+    note: links to apply.workable.com/houseful but the Workable API returned 404 at setup - retry token "houseful" later
+  - name: OnTheMarket
+    ats: none
+    lane: property
+    url: https://www.onthemarket.com/
+    note: CoStar Group careers
+  - name: OpenRent
+    ats: none
+    lane: property
+    url: https://www.openrent.co.uk/
+    note: no careers page found
+  - name: Goodlord
+    ats: ashby
+    token: goodlord
+    lane: property
+  - name: Reposit
+    ats: none
+    lane: property
+    url: https://reposit.co.uk/careers/
+    note: roles listed on their own site
+
+  # ----------------------------------------------------------------- media
+  - name: Hearst UK
+    ats: none
+    lane: media
+    url: https://www.hearst.co.uk/careers
+    note: Oracle HCM
+  - name: Hearst (global board)
+    ats: greenhouse
+    token: hearst
+    lane: media
+    note: US-run board, London roles appear occasionally
+  - name: Future plc
+    ats: workable
+    token: futureplc
+    lane: media
+  - name: Immediate Media
+    ats: workable
+    token: immediate-media-co
+    lane: media
+  - name: Bauer Media
+    ats: none
+    lane: media
+    url: https://jobs.bauermedia.com/?locale=en_GB
+    note: custom careers site
+  - name: News UK
+    ats: none
+    lane: media
+    url: https://www.newscareers.co.uk/vacancies/vacancy-search-results.aspx
+    note: custom careers site
+  - name: Telegraph Media Group
+    ats: none
+    lane: media
+    url: https://careers.telegraph.co.uk/
+    note: custom careers site
+  - name: Guardian
+    ats: none
+    lane: media
+    url: https://workwithus.theguardian.com/
+    note: custom careers site
+  - name: Financial Times
+    ats: greenhouse
+    token: financialtimes33
+    lane: media
+  - name: The Economist
+    ats: greenhouse
+    token: theeconomistgroup
+    lane: media
+  - name: Tortoise
+    ats: none
+    lane: media
+    url: https://www.tortoisemedia.com/
+    note: no careers page found
+  - name: New Statesman
+    ats: none
+    lane: media
+    url: https://progressivemediainvestments.com/careers/
+    note: parent company careers page
+  - name: DAZN
+    ats: none
+    lane: media
+    url: https://careers.dazn.com/
+    note: Pinpoint
+  - name: Audible UK
+    ats: none
+    lane: media
+    url: https://www.audiblecareers.com/
+    note: Amazon careers
+  - name: Which?
+    ats: none
+    lane: media
+    url: https://careers.which.co.uk/jobs/search
+    note: custom careers site
+  - name: HelloFresh
+    ats: greenhouse
+    token: hellofresh
+    lane: media
+    note: global board (400+ roles), UK ones filter through
+  - name: Gousto
+    ats: none
+    lane: media
+    url: https://www.gousto.co.uk/jobs
+    note: SmartRecruiters
+  - name: Butternut Box
+    ats: greenhouse
+    token: butternutbox
+    lane: media
+  - name: Tails.com
+    ats: none
+    lane: media
+    url: https://careers.tails.com/
+    note: Teamtailor
+  - name: Whoop
+    ats: ashby
+    token: whoop
+    lane: media
+    note: almost all Boston, rare UK roles
+  - name: Strava
+    ats: ashby
+    token: strava
+    lane: media
+    note: almost all SF, rare London roles
+
+  # ---------------------------------------------------------- marketplaces
+  - name: Vinted
+    ats: none
+    lane: marketplaces
+    url: https://careers.vinted.com/
+    note: custom careers site
+  - name: Depop
+    ats: none
+    lane: marketplaces
+    url: https://depopcareers.com/
+    note: custom careers site
+  - name: Vestiaire Collective
+    ats: lever
+    token: vestiairecollective
+    lane: marketplaces
+    note: mostly Paris
+  - name: eBay UK
+    ats: none
+    lane: marketplaces
+    url: https://jobs.ebayinc.com/
+    note: Phenom
+  - name: Etsy UK
+    ats: none
+    lane: marketplaces
+    url: https://careers.etsy.com/jobs/search
+    note: custom careers site
+  - name: Motorway
+    ats: ashby
+    token: motorway
+    lane: marketplaces
+  - name: Auto Trader
+    ats: greenhouse
+    token: autotrader
+    lane: marketplaces
+    note: Manchester HQ, so most roles fail the London/remote filter
+  - name: Airtasker
+    ats: ashby
+    token: airtasker
+    lane: marketplaces
+    note: mostly Sydney
+  - name: TaskRabbit
+    ats: greenhouse
+    token: taskrabbit
+    lane: marketplaces
+  - name: Fiverr
+    ats: none
+    lane: marketplaces
+    url: https://www.fiverr.com/careers
+    note: custom (Comeet)
+  - name: Deliveroo
+    ats: ashby
+    token: deliveroo
+    lane: marketplaces
+  - name: Just Eat Takeaway
+    ats: none
+    lane: marketplaces
+    url: https://careers.justeattakeaway.com/global/en
+    note: Phenom
+  - name: Wolt
+    ats: greenhouse
+    token: wolt
+    lane: marketplaces
+    note: global board, UK roles rare
+  - name: Uber UK
+    ats: none
+    lane: marketplaces
+    url: https://www.uber.com/gb/en/careers/
+    note: Oracle HCM
+  - name: Fresha
+    ats: lever
+    token: fresha
+    lane: marketplaces
+  - name: Treatwell
+    ats: workable
+    token: treatwell
+    lane: marketplaces

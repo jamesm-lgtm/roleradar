@@ -1,0 +1,61 @@
+name: Daily job sweep
+
+on:
+  schedule:
+    # GitHub cron is UTC. 07:30 Europe/London is 06:30 UTC in summer (BST)
+    # and 07:30 UTC in winter (GMT). Fire on both; the first step skips the
+    # one that isn't 07:xx London time.
+    - cron: "30 6 * * *"
+    - cron: "30 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sweep
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Is it 07:xx in London? (scheduled runs only)
+        id: gate
+        run: |
+          hour=$(TZ=Europe/London date +%H)
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$hour" != "07" ]; then
+            echo "London hour is $hour, not 07 - skipping this trigger."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.run == 'true'
+
+      - uses: actions/setup-python@v5
+        if: steps.gate.outputs.run == 'true'
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        if: steps.gate.outputs.run == 'true'
+        run: pip install -r requirements.txt
+
+      - name: Run sweep
+        if: steps.gate.outputs.run == 'true'
+        run: python sweep.py
+
+      - name: Commit results
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          git config user.name "roleradar-bot"
+          git config user.email "roleradar-bot@users.noreply.github.com"
+          git add seen.json new_roles.csv all_current.csv docs/index.html
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "sweep: $(TZ=Europe/London date +'%Y-%m-%d %H:%M')"
+            git push
+          fi

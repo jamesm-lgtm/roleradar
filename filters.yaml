@@ -1,0 +1,218 @@
+# Roleradar filters. Edit freely; no code changes needed.
+# All matching is case-insensitive and on whole words ("lead" matches
+# "Growth Lead" but not "Leadership", "PR" matches "PR Manager" but not "Product").
+
+# A title must contain at least ONE of these.
+title_keywords:
+  - head of
+  - director
+  - senior manager
+  - marketing manager
+  - crm
+  - lifecycle
+  - retention
+  - growth
+  - brand
+  - partner marketing
+  - customer value
+  - engagement
+  - digital
+
+# A title containing ANY of these is dropped...
+title_exclude:
+  - intern
+  - internship
+  - graduate
+  - junior
+  - executive assistant
+  - pr
+  - communications officer
+  - apprentice
+
+# ...and fixed-term contracts are dropped too, unless the title is senior.
+fixed_term_patterns:
+  - 12 month
+  - 12 months
+  - 12-month
+  - 6 month
+  - 6 months
+  - 6mth
+  - 9 month
+  - 9 months
+  - ftc
+  - fixed term
+  - fixed-term
+senior_keywords:
+  - senior
+  - head of
+  - director
+  - lead
+  - principal
+  - vp
+
+# Location rules. A role is kept if its location is blank, mentions London,
+# says remote/hybrid, or is just "United Kingdom" with no city. Anything that
+# names a non-UK place (and doesn't also say London) is dropped, as is a
+# UK-only city other than London (Manchester, Cardiff, Leeds...).
+location_london:
+  - london
+location_flexible:
+  - remote
+  - hybrid
+  - work from home
+  - wfh
+  - home-based
+  - home based
+location_uk_country:
+  - united kingdom
+  - uk
+  - england
+  - great britain
+  - gb
+  - britain
+location_non_uk:
+  # countries / regions
+  - united states
+  - usa
+  - us
+  - u.s.
+  - canada
+  - australia
+  - new zealand
+  - ireland
+  - germany
+  - france
+  - spain
+  - portugal
+  - italy
+  - netherlands
+  - belgium
+  - luxembourg
+  - switzerland
+  - austria
+  - poland
+  - czech
+  - czechia
+  - hungary
+  - romania
+  - bulgaria
+  - greece
+  - cyprus
+  - turkey
+  - sweden
+  - norway
+  - denmark
+  - finland
+  - estonia
+  - latvia
+  - lithuania
+  - india
+  - pakistan
+  - china
+  - hong kong
+  - singapore
+  - japan
+  - korea
+  - taiwan
+  - philippines
+  - vietnam
+  - indonesia
+  - malaysia
+  - thailand
+  - uae
+  - dubai
+  - qatar
+  - doha
+  - israel
+  - south africa
+  - nigeria
+  - kenya
+  - egypt
+  - tunisia
+  - morocco
+  - brazil
+  - mexico
+  - argentina
+  - colombia
+  - chile
+  - kazakhstan
+  - kosovo
+  - serbia
+  - croatia
+  - slovakia
+  - slovenia
+  - ukraine
+  - georgia
+  - armenia
+  # cities that show up a lot on these boards
+  - new york
+  - san francisco
+  - boston
+  - chicago
+  - austin
+  - denver
+  - seattle
+  - los angeles
+  - toronto
+  - vancouver
+  - sydney
+  - melbourne
+  - brisbane
+  - adelaide
+  - dublin
+  - berlin
+  - munich
+  - hamburg
+  - paris
+  - amsterdam
+  - rotterdam
+  - brussels
+  - madrid
+  - barcelona
+  - lisbon
+  - milan
+  - rome
+  - zurich
+  - vienna
+  - warsaw
+  - krakow
+  - prague
+  - budapest
+  - bucharest
+  - sofia
+  - athens
+  - nicosia
+  - stockholm
+  - oslo
+  - copenhagen
+  - helsinki
+  - tallinn
+  - vilnius
+  - riga
+  - bangalore
+  - bengaluru
+  - hyderabad
+  - gurugram
+  - gurgaon
+  - mumbai
+  - delhi
+  - pune
+  - chennai
+  - manila
+  - tokyo
+  - shanghai
+  - cape town
+  - pristina
+  - almaty
+  - tbilisi
+  - tel aviv
+  - sf
+  - ny
+  - nyc
+  - la
+  - dc
+  - virginia
+  - michigan
+  - texas
+  - california
+  - florida
