@@ -40,7 +40,7 @@ HEADERS = {"User-Agent": "roleradar/1.0 (personal job sweep; contact via GitHub)
 # Forget a job we haven't seen on any board for this long, so seen.json doesn't grow forever.
 FORGET_AFTER_DAYS = 90
 
-CSV_COLUMNS = ["date_found", "company", "lane", "title", "location", "salary", "url"]
+CSV_COLUMNS = ["date_found", "company", "lane", "title", "location", "salary", "posted", "days_live", "url"]
 
 log = logging.getLogger("roleradar")
 
@@ -256,6 +256,7 @@ def append_new_csv(rows):
 
 
 def days_live(row, today):
+    """Days since the ATS posting date, falling back to the day we first saw it."""
     start = row.get("posted") or row.get("date_found")
     try:
         return (today - date.fromisoformat(start)).days
@@ -276,7 +277,7 @@ def write_html(rows, manual, errors, today, run_stamp):
             f"<div class=\"sub\">{e(r['company'])} · {e(r['lane'])}</div></td>"
             f"<td>{e(r['location'])}</td>"
             f"<td>{e(r['salary'])}</td>"
-            f"<td class=\"num\">{days_live(r, today)}</td>"
+            f"<td class=\"num\">{r['days_live']}</td>"
             "</tr>"
         )
 
@@ -425,6 +426,9 @@ def main():
         if gone_days > FORGET_AFTER_DAYS:
             del seen[key]
 
+    for r in current:
+        r["days_live"] = days_live(r, today)
+
     # Newest first; within a day, alphabetical by company then title.
     current.sort(key=lambda r: (r["date_found"], r["company"], r["title"]))
     current.sort(key=lambda r: r["date_found"], reverse=True)
@@ -437,8 +441,7 @@ def main():
         # Don't touch the two files that carry state across runs.
         log.info("dry run: seen.json and new_roles.csv not updated")
     else:
-        if new_rows or not NEW_CSV.exists():
-            append_new_csv(new_rows)
+        append_new_csv(new_rows)  # always rewrite so the header tracks CSV_COLUMNS
         save_seen(seen)
 
     log.info(

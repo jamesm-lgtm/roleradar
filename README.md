@@ -20,6 +20,10 @@ are listed on the output page under **Manual check** so you know what's not cove
 | `seen.json` | State: every matching job ever seen, with first/last seen dates. Committed by the Action. |
 | `new_roles.csv` | Append-only log of newly found roles, newest run at the top. |
 | `all_current.csv` | Every currently-live matching role, newest first. |
+
+Both CSVs have the same columns: `date_found, company, lane, title, location,
+salary, posted, days_live, url`. `posted` is the date the ATS reports and
+`days_live` is days since then (falling back to `date_found`), recomputed each run.
 | `docs/index.html` | The page. Published via GitHub Pages. |
 | `.github/workflows/sweep.yml` | Daily cron + manual trigger. Commits results back. |
 
