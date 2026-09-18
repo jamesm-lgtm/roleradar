@@ -3,8 +3,8 @@ name: Daily job sweep
 on:
   schedule:
     # GitHub cron is UTC. 07:30 Europe/London is 06:30 UTC in summer (BST)
-    # and 07:30 UTC in winter (GMT). Fire on both; the first step skips the
-    # one that isn't 07:xx London time.
+    # and 07:30 UTC in winter (GMT). Both crons are registered; the gate step
+    # keeps whichever one matches the current UK offset and skips the other.
     - cron: "30 6 * * *"
     - cron: "30 7 * * *"
   workflow_dispatch:
@@ -20,16 +20,27 @@ jobs:
   sweep:
     runs-on: ubuntu-latest
     steps:
-      - name: Is it 07:xx in London? (scheduled runs only)
+      - name: Keep the cron that matches UK time (scheduled runs only)
         id: gate
+        env:
+          EVENT: ${{ github.event_name }}
+          CRON: ${{ github.event.schedule }}
         run: |
-          hour=$(TZ=Europe/London date +%H)
-          if [ "${{ github.event_name }}" = "schedule" ] && [ "$hour" != "07" ]; then
-            echo "London hour is $hour, not 07 - skipping this trigger."
-            echo "run=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "run=true" >> "$GITHUB_OUTPUT"
+          # Decide by WHICH cron fired plus the current UK offset, not by the
+          # wall-clock hour. GitHub often starts scheduled runs hours late, and a
+          # clock-based check would skip every delayed run.
+          if [ "$EVENT" != "schedule" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"; exit 0
           fi
+          offset=$(TZ=Europe/London date +%z)   # +0100 during BST, +0000 during GMT
+          case "$CRON|$offset" in
+            "30 6 * * *|+0100"|"30 7 * * *|+0000")
+              echo "cron '$CRON' matches UK offset $offset - running."
+              echo "run=true" >> "$GITHUB_OUTPUT" ;;
+            *)
+              echo "cron '$CRON' is the other season's slot (UK offset $offset) - skipping."
+              echo "run=false" >> "$GITHUB_OUTPUT" ;;
+          esac
 
       - uses: actions/checkout@v4
         if: steps.gate.outputs.run == 'true'

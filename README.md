@@ -20,12 +20,12 @@ are listed on the output page under **Manual check** so you know what's not cove
 | `seen.json` | State: every matching job ever seen, with first/last seen dates. Committed by the Action. |
 | `new_roles.csv` | Append-only log of newly found roles, newest run at the top. |
 | `all_current.csv` | Every currently-live matching role, newest first. |
+| `docs/index.html` | The page. Published via GitHub Pages. |
+| `.github/workflows/sweep.yml` | Daily cron + manual trigger. Commits results back. |
 
 Both CSVs have the same columns: `date_found, company, lane, title, location,
 salary, posted, days_live, url`. `posted` is the date the ATS reports and
 `days_live` is days since then (falling back to `date_found`), recomputed each run.
-| `docs/index.html` | The page. Published via GitHub Pages. |
-| `.github/workflows/sweep.yml` | Daily cron + manual trigger. Commits results back. |
 
 ## Run it locally
 
@@ -62,10 +62,12 @@ Then create an empty repo on GitHub, push, and:
    Branch `main`, folder `/docs`. Your page will be at
    `https://<user>.github.io/<repo>/`. Bookmark it on your phone.
 
-After that it runs itself. The cron fires at 06:30 and 07:30 UTC and the
-workflow skips whichever one isn't 07:xx London time, so it stays at 07:30
-across the BST/GMT switch. GitHub may delay scheduled runs by a few minutes
-under load; that's normal.
+After that it runs itself. Two crons are registered (06:30 and 07:30 UTC)
+and the first step keeps whichever one matches the current UK offset, so it
+stays at 07:30 UK across the BST/GMT switch. The check is based on which cron
+fired, not the clock, because GitHub frequently starts scheduled runs late:
+in this repo's first week the delay was four to seven hours every day. Expect
+the results mid-morning rather than at 07:30 sharp.
 
 Note: GitHub disables scheduled workflows on repos with no activity for 60
 days. The bot's own commits count as activity, so this only bites if the
